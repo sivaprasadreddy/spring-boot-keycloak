@@ -1,4 +1,4 @@
-const STATE_KEY = "bookmarks-app-state";
+const STATE_KEY = "CATALOG-REACT-CLIENT-APP-STATE";
 
 export const cleanState = () => {
     try {
@@ -11,7 +11,7 @@ export const cleanState = () => {
 export const setUserAuth = (user) => {
     try {
         let existingState = localStorage.getItem(STATE_KEY);
-        console.log('existingState:', existingState)
+        //console.log('existingState:', existingState)
         if (existingState === null) {
             existingState = "{}"
         }

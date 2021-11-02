@@ -1,14 +1,24 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {isUserAuthenticated, logout} from '../services/user-service';
+import {keycloakLogin, keycloakLogout, keycloakRedirectUri} from "../keycloak-service";
 
 class NavBar extends React.Component {
 
+  loginHandler = () => {
+    keycloakLogin({
+      "redirectUri": keycloakRedirectUri
+    });
+  };
+
   logoutHandler = () => {
+    logout();
+    keycloakLogout();
     window.location = "/";
   };
 
   render() {
-    let isAuthenticated = true;
+    let isAuthenticated = isUserAuthenticated();
       let authenticatedLinks;
 
       if (isAuthenticated) {
@@ -25,7 +35,7 @@ class NavBar extends React.Component {
       } else {
           authenticatedLinks = (
               <li className="nav-item">
-                  <NavLink className="nav-link" to="/login">
+                  <NavLink className="nav-link" to="/login" onClick={this.loginHandler}>
                       Login
                   </NavLink>
               </li>

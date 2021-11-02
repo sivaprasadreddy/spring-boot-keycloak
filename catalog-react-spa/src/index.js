@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {Router} from "react-router";
+import {HashRouter} from 'react-router-dom';
 import {createBrowserHistory} from "history";
+import {initKeycloak} from './keycloak-service';
 import App from "./App";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,9 +12,11 @@ import 'popper.js';
 
 export const history = createBrowserHistory();
 
-ReactDOM.render(
-    <Router history={history}>
+const renderApp = () => ReactDOM.render(
+    <HashRouter>
       <App />
-    </Router>,
+    </HashRouter>,
     document.getElementById("root")
 );
+
+initKeycloak(renderApp);
